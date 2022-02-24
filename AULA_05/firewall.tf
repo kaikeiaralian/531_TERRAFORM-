@@ -1,11 +1,12 @@
-resource "google_compute_firewall" "allow-22" {
-  name    = "allow-22"
-  network = data.google_compute_network.default.name
+
+resource "google_compute_firewall" "valhalla-ingress" {
+  name    = "valhalla-ingress"
+  network = google_compute_network.ivar.name
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["22", "80"]
   }
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["web"]
+  target_tags   = ["admin", "web"]
 }
